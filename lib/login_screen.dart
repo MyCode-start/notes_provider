@@ -89,7 +89,7 @@ class _logindetailsState extends State<logindetails> {
                             );
 
                           },
-                          child: Text('Signup'),
+                          child: Text('User Signup'),
                         ),
                       ],
                     );
