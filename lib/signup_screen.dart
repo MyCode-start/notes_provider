@@ -127,7 +127,11 @@ class _signuppageState extends State<signuppage> {
 
                               });
                             },
+<<<<<<< HEAD
                             child: Text('Try Again Later'),
+=======
+                            child: Text('Try Again Please'),
+>>>>>>> e7b1c778b78ea82e1349bfa8eaeeef63c7486651
                           ),
                         ],
                       );
