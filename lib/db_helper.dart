@@ -37,7 +37,7 @@ class DBhelper {
   }
 
 
-  void addData(String title, String desc) async {
+  Future <void> addData(String title, String desc) async {
     var myDB = await openDb();
     myDB.insert(dialogueTable, {columnTitle: title, columnDesc: desc});
   }
@@ -67,6 +67,7 @@ class DBhelper {
       userpassword: password,
     });
   }
+
 
 
   Future<bool> isemailexist(String email) async {
