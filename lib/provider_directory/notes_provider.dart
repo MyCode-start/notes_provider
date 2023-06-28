@@ -21,6 +21,12 @@ class NotesProvider extends ChangeNotifier {
 
   }
 
+  void delNotes (int index) async{
+    await DBhelper().delData(index);
+    myData = await DBhelper().fetchData();
+    notifyListeners();
+  }
+
 
 
 }

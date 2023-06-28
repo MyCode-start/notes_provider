@@ -48,7 +48,7 @@ class DBhelper {
     return myDB.query(dialogueTable);
   }
 
-  void delData(int id) async {
+  Future <void> delData(int id) async {
     var myDB = await openDb();
     await myDB.delete(
         dialogueTable, where: '$columnId = ?', whereArgs: [id.toString()]);

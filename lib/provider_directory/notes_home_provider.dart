@@ -19,12 +19,13 @@ class _mainnotespagefromproviderState extends State<mainnotespagefromprovider> {
   var title;
   var desc;
 
-  List<Map<String, dynamic>> arrNotes = [];
+  /*List<Map<String, dynamic>> arrNotes = [];*/
 
 
 
   @override
   void initState() {
+    context.read<NotesProvider>().getNotes();
     super.initState();
   }
 
@@ -37,9 +38,9 @@ class _mainnotespagefromproviderState extends State<mainnotespagefromprovider> {
         ),
         backgroundColor: Colors.black26,
         body: Consumer<NotesProvider>(
-        builder: (_, __, ___) {
+        builder: (_, provider, ___) {
           return GridView.builder(
-              itemCount: arrNotes.length,
+              itemCount: provider.myData.length,
               scrollDirection: Axis.vertical,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
@@ -62,17 +63,11 @@ class _mainnotespagefromproviderState extends State<mainnotespagefromprovider> {
                               TextButton(
 
                                 onPressed: () {
-                                  /*DBhelper().delData(notes[index]['note_id']);
-                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: ((context)=> mainnotespage())));*/
+                                  context.read<NotesProvider>().delNotes(provider.myData[index][DBhelper().columnId]);
+                                  Navigator.pop(context);
                                 }, child: Text('Delete'),
 
-                                /*onLongPress: () async{
 
-                                  DBhelper().delData(notes[index]['note_id']);
-                                  /*getAllNotes();*/
-                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: ((context)=> mainnotespage())));
-
-                                },*/
                               ),
                               TextButton(
 
@@ -92,11 +87,11 @@ class _mainnotespagefromproviderState extends State<mainnotespagefromprovider> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(arrNotes[index][DBhelper().columnTitle], style: TextStyle(
+                        Text(provider.myData[index][DBhelper().columnTitle], style: TextStyle(
                             fontSize: 21, fontWeight: FontWeight.bold),),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(arrNotes[index][DBhelper().columnDesc],
+                          child: Text(provider.myData[index][DBhelper().columnDesc],
                               style: TextStyle(fontSize: 15)),
                         ),
                       ],
@@ -152,8 +147,5 @@ class _mainnotespagefromproviderState extends State<mainnotespagefromprovider> {
     );
   }
 
-  void getAllData() {
-    arrNotes = context.watch<NotesProvider>().myData;
-  }
 
 }
