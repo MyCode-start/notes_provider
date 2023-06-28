@@ -1,11 +1,19 @@
 
-
 import 'package:flutter/material.dart';
-import 'package:notes_app_provider/splash_screen.dart';
+import 'package:notes_app_provider/provider_directory/notes_home_provider.dart';
+import 'package:notes_app_provider/provider_directory/notes_provider.dart';
+import 'package:provider/provider.dart';
+
 
 void main() {
-  runApp(const MyApp());
-}
+  runApp( MultiProvider(
+        providers:[
+          ChangeNotifierProvider(create: (_)=> NotesProvider())
+        ],
+          child: const MyApp()));
+    }
+
+
 
 class MyApp extends StatelessWidget {
   const MyApp();
@@ -17,7 +25,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: splash(),
+      home: mainnotespagefromprovider(),
     );
   }
 }
